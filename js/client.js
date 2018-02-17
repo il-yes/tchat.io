@@ -10,5 +10,14 @@ $(document).ready(function () {
 			'password' : $('#pwd').val()
 		})
 	})
+
+	// Reception
+	socket.on('new_user', function(user){
+		$('#users').append('<img src="'+ user.avatar +'" id="'+ user.id +'">');
+	})
+
+	socket.on('disconnect_user', function(user){
+		$('#'+ user.id).remove()
+	})
 });
 
