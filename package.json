@@ -4,7 +4,8 @@
   "description": "tchat",
   "main": "app.js",
   "devDependencies": {
-    "mustache": "^2.3.0"
+    "mustache": "^2.3.0",
+    "nodemon": "^1.15.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -5,8 +5,37 @@
 
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+		<link rel="stylesheet" href="css/style.css">
 	</head>
 	<body>
+		<div class="row login-layer">
+			<div class="row panel-title">
+				<h1>Tchat socket.io</h1>
+				<p>This is a paragraph. <a href="forum.html"><i class="fa fa-arrow-right"></i> Forums</a></p>
+			</div>
+			
+			<div class="row panel-form">
+				<div class="col-sm-8 col-sm-offset-2">
+					<!-- FORM LOGIN -->
+					<form id="login-form" action="/action_page.php">
+						<div class="form-group">
+							<label for="email">Email address:</label>
+							<input type="email" class="form-control" id="email">
+						</div>
+						<div class="form-group">
+							<label for="pwd">Password:</label>
+							<input type="password" class="form-control" id="pwd">
+						</div>
+						<div class="checkbox">
+							<label><input type="checkbox"> Remember me</label>
+						</div>
+						<button type="submit" class="btn btn-default">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>	
+
 		<div class="container">
 
 			<div id="users"></div>
@@ -16,33 +45,27 @@
 				<div id="msgtpl" class="message">
 					<img src="{{{ user.avatar }}}" alt="">
 					<div class="info">
-						<p><strong>{{ user.username }}</strong></p>
-						<p>{{ message }}</p>
-						<span class="date">{{ h }} : {{ m }}</span>
+						<p><strong><i class="fas fa-user-circle"></i> | </i>{{ user.username }}</strong></p>
+						<p><i class="fas fa-envelope-open"></i> | {{ message }}</p>
+						<span class="date"><i class="far fa-clock"></i> | {{ h }}:{{ m }}</span>
 					</div>
 				</div>
 			</div>
-			<h1>Tchat socket.io</h1>
-			<p>This is a paragraph. <a href="forum.html"><i class="fa fa-arrow-right"></i> Forums</a></p>
-			<div class="row">
-				<div class="col-sm-8 col-sm-offset-2">
-					<!-- FORM LOGIN -->
-					<form id="login-form" action="/action_page.php">
+			
+			
+			<div class="row messages">
+				<form id="messages-form" action="/action_page.php">
 					<div class="form-group">
-						<label for="email">Email address:</label>
-						<input type="email" class="form-control" id="email">
+						<label for="message">my message :</label>
+						<input type="text" class="form-control" id="message">
 					</div>
-					<div class="form-group">
-						<label for="pwd">Password:</label>
-						<input type="password" class="form-control" id="pwd">
-					</div>
-						<div class="checkbox">
-							<label><input type="checkbox"> Remember me</label>
-						</div>
 					<button type="submit" class="btn btn-default">Submit</button>
 				</form>
-				</div>
 			</div>
+
+
+
+
 
 			
 			

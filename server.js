@@ -2,6 +2,7 @@ const http = require('http');
 const net = require('net');
 const url = require('url');
 const md5 = require('MD5')
+const faker = require('faker');
 
 
 
@@ -28,7 +29,9 @@ io.sockets.on('connection', function(socket){
 	}
 
 
+	// ---------- LOGIN
 	var me = false;
+
 	//Reception
 	socket.on('login', function(user){
 		console.log(user)
@@ -37,9 +40,12 @@ io.sockets.on('connection', function(socket){
 		me.avatar = 'https://gravatar.com/avatar'+ md5(user.mail) +'?s=50';
 
 		users[me.id] = me
+		me.username = faker.name.findName(); // Rowan Nikolaus
 		io.sockets.emit('new_user', me)
+		socket.emit('logged')
 	})
 
+	// ---------- LOGOUT
 	socket.on('disconnect', function(user){
 		if(!me)
 		{
@@ -47,6 +53,15 @@ io.sockets.on('connection', function(socket){
 		}
 		delete users[me.id]
 		io.sockets.emit('disconnect_user', me)
+	})
+
+
+	socket.on('post_message', function(message){
+		message.user = me
+		date = new Date()
+		message.h = date.getHours()
+		message.m = date.getMinutes()
+		io.sockets.emit('post_message', message)
 	})
 })
 
