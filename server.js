@@ -19,6 +19,11 @@ const io = require('socket.io').listen(httpServer)
 
 io.sockets.on('connection', function(socket){
 	console.log('Nouveau user')
+
+	//Reception
+	socket.on('login', function(user){
+		console.log(user)
+	})
 })
 
 
