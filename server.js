@@ -1,3 +1,4 @@
+// Dependencies
 const http = require('http');
 const net = require('net');
 const url = require('url');
@@ -6,62 +7,83 @@ const faker = require('faker');
 
 
 
-// Create an HTTP tunneling proxy
+// Create an HTTP 
 const httpServer = http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
   res.end('okay');
 
-  console.log('Connection ok !')
+  console.log('Connection server ok !')
 });
-
 httpServer.listen(8080)
 
 
+
+// Initialisation
 const io = require('socket.io').listen(httpServer)
 var users = {};
+var messages = [];
+var history = 2;
 
+
+// Poit d'entrée
 io.sockets.on('connection', function(socket){
-	console.log('Nouveau user')
+	console.log('New connection')
 
+	// assure l'historique lors de la connexion, des users connectés, des messages postés
 	for(var k in users)
 	{
 		socket.emit('new_user', users[k])
 	}
+	for(var k in messages)
+	{
+		socket.emit('post_message', messages[k])
+	}
 
 
-	// ---------- LOGIN
+	// ------------------- Login / Logout HANDLER ------------------------- //
 	var me = false;
 
-	//Reception
+	//Reception connexion
 	socket.on('login', function(user){
 		console.log(user)
 		me = user
 		me.id = user.mail.replace('@', '-').replace('.', '-');
-		me.avatar = 'https://gravatar.com/avatar'+ md5(user.mail) +'?s=50';
-
-		users[me.id] = me
+		me.avatar = faker.internet.avatar()
 		me.username = faker.name.findName(); // Rowan Nikolaus
-		io.sockets.emit('new_user', me)
-		socket.emit('logged')
+		users[me.id] = me
+
+		io.sockets.emit('new_user', me) // emission connexion
+		socket.emit('logged')			// emission confirmation connexion
 	})
 
-	// ---------- LOGOUT
+	// Reception deconnexion
 	socket.on('disconnect', function(user){
 		if(!me)
 		{
 			return false
 		}
 		delete users[me.id]
-		io.sockets.emit('disconnect_user', me)
+		io.sockets.emit('disconnect_user', me)	// emission deconnexion
 	})
+	// ---------------------------------------------------------------------- //
 
 
+	// Reception Post message
 	socket.on('post_message', function(message){
 		message.user = me
 		date = new Date()
 		message.h = date.getHours()
 		message.m = date.getMinutes()
-		io.sockets.emit('post_message', message)
+
+		messages.push(message)
+		if(messages.length > history)
+		{
+			messages.shift()
+		}
+
+		io.sockets.emit('post_message', message)	// emission post message
+
+		
 	})
 })
 

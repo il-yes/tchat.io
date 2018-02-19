@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/il-yes/tchat.io/issues"
   },
-  "homepage": "https://github.com/il-yes/tchat.io#readme"
+  "homepage": "https://github.com/il-yes/tchat.io#readme",
+  "dependencies": {
+    "mysql": "^2.15.0"
+  }
 }

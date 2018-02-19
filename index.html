@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="css/style.css">
 	</head>
 	<body>
+		<!-- Page login -->
 		<div class="row login-layer">
 			<div class="row panel-title">
 				<h1>Tchat socket.io</h1>
@@ -34,42 +35,51 @@
 					</form>
 				</div>
 			</div>
-		</div>	
+		</div>
 
-		<div class="container">
 
-			<div id="users"></div>
-			<hr>
 
-			<div id="messages">
-				<div id="msgtpl" class="message">
-					<img src="{{{ user.avatar }}}" alt="">
-					<div class="info">
-						<p><strong><i class="fas fa-user-circle"></i> | </i>{{ user.username }}</strong></p>
-						<p><i class="fas fa-envelope-open"></i> | {{ message }}</p>
-						<span class="date"><i class="far fa-clock"></i> | {{ h }}:{{ m }}</span>
+		<div class="container-fluid">
+			<!-- Chat -->
+		<div class="row platform">
+			<!-- CHAT AREA -->
+			<div class="col-sm-8 panel-chat">
+				<hr>
+				<!-- Messages -->
+				<div id="messages">
+					<div id="msgtpl" class="message">
+						<img src="{{{ user.avatar }}}" class="message-img" alt="">
+						<div class="info">
+							<p><strong><i class="fas fa-user-circle"></i> | </i>{{ user.username }}</strong></p>
+							<p><i class="fas fa-envelope-open"></i> | {{ message }}</p>
+							<span class="date"><i class="far fa-clock"></i> | {{ h }}:{{ m }}</span>
+						</div>
 					</div>
 				</div>
+				<!-- Form messages -->
+				<div class="messages">
+					<form id="messages-form" action="/action_page.php">
+						<div class="form-group">
+							<label for="message">my message :</label>
+							<input type="text" class="form-control" id="message">
+						</div>
+						<button type="submit" class="btn btn-default">Submit</button>
+					</form>
+				</div>
 			</div>
-			
-			
-			<div class="row messages">
-				<form id="messages-form" action="/action_page.php">
-					<div class="form-group">
-						<label for="message">my message :</label>
-						<input type="text" class="form-control" id="message">
-					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
-				</form>
+
+			<!-- CONNECTED USERS -->
+			<div class="col-sm-2 panel-connected-users">
+				<div id="users"></div>
 			</div>
-
-
-
-
-
-			
-			
 		</div>
+		</div>	
+
+
+		
+
+		
+		
 
 		
 
