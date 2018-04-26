@@ -1,0 +1,27 @@
+{
+  "name": "tchat.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "jshint hello.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/il-yes/tchat.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/il-yes/tchat.io/issues"
+  },
+  "homepage": "https://github.com/il-yes/tchat.io#readme",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "http": "0.0.0",
+    "nodemon": "^1.15.0",
+    "socket.io": "^2.0.4",
+    "jshint" :  " ^ 2.6.0 " 
+  }
+}

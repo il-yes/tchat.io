@@ -1,14 +1,30 @@
-const http = require('http');
-const net = require('net');
-const url = require('url');
+const http = require('http')
+const express = require('express')
+const app = express()
+const cors = require('cors')
 
+app.use(cors())
 
-// Create an HTTP tunneling proxy
-const httpServer = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
+// Create an HTTP
+const httpServer = http.createServer(function(req, res){
+  res.writeHead(200, { 'Content-Type': 'text/html' });
   res.end('okay');
 
   console.log('Connection ok !')
 });
 
-httpServer.listen(8080)
+
+
+// Chargement de socket.io
+var io = require('socket.io').listen(http);
+
+// Quand un client se connecte, on le note dans la console
+io.sockets.on('connection', function (socket) {
+    console.log('Un client est connecté !');
+});
+
+
+
+
+httpServer.listen(7000);
+
