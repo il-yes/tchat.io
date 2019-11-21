@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  var socket = io.connect('http://localhost:8080');
+  var socket = io.connect('http://localhost:9000');
 	console.log("connection !!!"); 
 	var messageField = $('#message');
 	var msgtpl = $('#msgtpl');
